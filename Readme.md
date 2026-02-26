@@ -1,6 +1,4 @@
-# PROJE ADI
-
-> **Not:** Bu bölüm proje adı ile güncellenmelidir.
+# Ashura Forge
 
 ---
 
@@ -9,15 +7,13 @@
 ![Ürün Tanıtım Görseli](Product.png)
 
 **Proje Tanımı:** 
-> Projenin ne iş yaptığını anlatan bir paragraflık tanıtım metni buraya yazılacaktır.
-
-**Örnek:** ASY isimli e-ticaret sitemiz, online alışveriş deneyimini kolay ve keyifli hale getirmek için tasarlandı. Geniş ürün yelpazemiz sayesinde müşterilerimize en iyi seçenekleri sunarken, kullanıcı dostu arayüzümüz ile de alışveriş yapmayı daha rahat hale getiriyoruz. Sitemizde yer alan ürünler, kaliteli ve güvenilir markaların en yeni ve trend ürünlerinden oluşuyor. Müşterilerimiz, aradıkları ürünleri hızlı ve kolay bir şekilde bulabilirken, aynı zamanda satın alma süreçlerinde de sorunsuz bir deneyim yaşayacaklar. Hızlı teslimat seçenekleri, güvenli ödeme sistemleri ve müşteri memnuniyetine önem veren satış sonrası hizmetlerimizle, ASY olarak müşterilerimizin beklentilerini en üst seviyede karşılamayı hedefliyoruz. Her zaman en iyi fiyatlarla, kaliteli ürünleri müşterilerimize sunmak için çalışıyoruz ve müşteri memnuniyeti bizim için her zaman önceliklidir. ASY e-ticaret sitemize hoş geldiniz, size hizmet vermek için sabırsızlanıyoruz.
+Ashura Forge isimli calisthenics uygulamamız, spor rutininizi daha takip edilebilir ve disiplinli hale getirmek için tasarlandı. Özel antrenman programlarımız sayesinde sporseverlere en iyi seçenekleri sunarken, kullanıcı dostu arayüzümüz ile antrenman yapmayı daha verimli hale getiriyoruz. Sitemizde yer alan içerikler, her seviyeye uygun ve hedefe yönelik programlardan oluşuyor. Kullanıcılarımız, aradıkları antrenmanları hızlı ve kolay bir şekilde bulabilirken, aynı zamanda motivasyon sağlayan özelliklerimizle gelişim süreçlerinde sorunsuz bir deneyim yaşayacaklar. Kişiselleştirilmiş hatırlatmalar ve sürekliliği destekleyen sistemimizle, Ashura Forge olarak kullanıcılarımızın beklentilerini en üst seviyede karşılamayı hedefliyoruz. Her zaman en iyi programlarla, sağlıklı gelişimi kullanıcılarımıza sunmak için çalışıyoruz ve spordaki disiplininiz bizim için her zaman önceliklidir. Ashura Forge sitemize hoş geldiniz, hedeflerinize ulaşmanızda size destek olmak için sabırsızlanıyoruz.
 
 **Proje Kategorisi:** 
-> Projenin hangi alanda yapıldığını belirten bir kategori. Örnek: E-Ticaret, Sosyal Medya vb.
+Spor ve sağlıklı yaşam.
 
 **Referans Uygulama:** 
-> [Örnek Referans Uygulama](https://example.com)
+> [Örnek Referans Uygulama](https://tryarise.app/)
 
 ---
 
@@ -30,16 +26,11 @@
 
 ## Proje Ekibi
 
-**Grup Adı:** 
-> Belirlediğiniz grup adı buraya yazılacaktır.
+**Grup Adı: Ashura Forge** 
+
 
 **Ekip Üyeleri:** 
-- Ali Tutar
-- Veli Yılmaz
-- Selami Demir
-- Ayşe Kaya
-- Fatma Öztürk
-- Hayriye Şahin
+- Neset Ayberk Alkan
 
 ---
 
