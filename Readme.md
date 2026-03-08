@@ -9,6 +9,8 @@
 **Proje Tanımı:** 
 Ashura Forge isimli calisthenics uygulamamız, spor rutininizi daha takip edilebilir ve disiplinli hale getirmek için tasarlandı. Özel antrenman programlarımız sayesinde sporseverlere en iyi seçenekleri sunarken, kullanıcı dostu arayüzümüz ile antrenman yapmayı daha verimli hale getiriyoruz. Sitemizde yer alan içerikler, her seviyeye uygun ve hedefe yönelik programlardan oluşuyor. Kullanıcılarımız, aradıkları antrenmanları hızlı ve kolay bir şekilde bulabilirken, aynı zamanda motivasyon sağlayan özelliklerimizle gelişim süreçlerinde sorunsuz bir deneyim yaşayacaklar. Kişiselleştirilmiş hatırlatmalar ve sürekliliği destekleyen sistemimizle, Ashura Forge olarak kullanıcılarımızın beklentilerini en üst seviyede karşılamayı hedefliyoruz. Her zaman en iyi programlarla, sağlıklı gelişimi kullanıcılarımıza sunmak için çalışıyoruz ve spordaki disiplininiz bizim için her zaman önceliklidir. Ashura Forge sitemize hoş geldiniz, hedeflerinize ulaşmanızda size destek olmak için sabırsızlanıyoruz.
 
+---
+
 **Proje Kategorisi:** 
 Spor ve sağlıklı yaşam.
 
