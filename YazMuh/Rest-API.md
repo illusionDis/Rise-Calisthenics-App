@@ -1,7 +1,7 @@
 # AshuraForge REST API
 
 > **Domain:** `https://ashuraforge-api.railway.app`  
-> **Swagger UI:** `https://ashuraforge-api.railway.app/index.html`
+> **Swagger UI:** [`https://ashuraforge-api.railway.app/index.html`](https://ashura-forge-production-7424.up.railway.app)
 
 ---
 
