@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "11fdbfc1-45fd-4865-8efc-b17084b7e009",
+		"name": "AshuraForge API Testleri",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50803353"
+	},
+	"item": [
+		{
+			"name": "1-Register(kayıt ol)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"test@test.com\",\r\n  \"password\": \"Password123*\",\r\n  \"username\": \"test_kullanici\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ashura-forge-production-7424.up.railway.app/api/Auth/register",
+					"protocol": "https",
+					"host": [
+						"ashura-forge-production-7424",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"api",
+						"Auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2- Login (Giriş Yap)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"test@test.com\",\r\n  \"password\": \"Password123*\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ashura-forge-production-7424.up.railway.app/api/Auth/login",
+					"protocol": "https",
+					"host": [
+						"ashura-forge-production-7424",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"api",
+						"Auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
