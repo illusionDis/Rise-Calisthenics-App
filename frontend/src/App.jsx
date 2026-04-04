@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Mail, Lock, User, Dumbbell, ArrowRight, LogOut, Trophy, Activity, Plus, Medal, Flame, Trash2, Bell, Settings, Image as ImageIcon, Home } from 'lucide-react';
+import { Mail, Lock, User, Dumbbell, ArrowRight, LogOut, Trophy, Activity, Plus, Medal, Flame, Trash2, Bell, Settings, Image as ImageIcon, Home, Upload } from 'lucide-react';
 import axios from 'axios';
 
 const API_URL = 'https://ashura-forge-production-7424.up.railway.app';
@@ -9,6 +9,7 @@ export default function App() {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('profilePic'); // Çıkışta resmi de temizle
     setToken(null);
   };
 
@@ -23,16 +24,23 @@ function MainApp({ token, onLogout }) {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  
+  // Profil fotoğrafını her an her yerde göstermek için Global Hafıza
+  const [globalProfilePic, setGlobalProfilePic] = useState(localStorage.getItem('profilePic'));
 
-  // Kullanıcı verilerini (Unvan, Rozet, Fotoğraf vs.) merkezi olarak çekiyoruz
   const fetchUserData = async () => {
     try {
       const res = await axios.get(`${API_URL}/api/Progress`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUserData(res.data.data);
+      // Backend'den resim gelirse ve lokalde yoksa onu kullan
+      if(res.data.data?.profileImageUrl && !localStorage.getItem('profilePic')) {
+        setGlobalProfilePic(res.data.data.profileImageUrl);
+        localStorage.setItem('profilePic', res.data.data.profileImageUrl);
+      }
     } catch (err) {
-      console.error("User data fetch error:", err);
+      console.error("Veri çekilemedi:", err);
     } finally {
       setLoading(false);
     }
@@ -57,14 +65,14 @@ function MainApp({ token, onLogout }) {
         {/* Navigation Header */}
         <div className="flex flex-col md:flex-row justify-between items-center bg-gray-900 border border-gray-800 p-6 rounded-3xl shadow-xl gap-4">
           <div className="flex items-center gap-4">
-            {/* Profil Fotoğrafı Alanı */}
+            {/* HER ZAMAN GÖRÜNEN PROFIL FOTOGRAFI BURASI */}
             <div className="w-14 h-14 bg-gray-950 border-2 border-amber-500 rounded-full flex items-center justify-center shadow-lg overflow-hidden shrink-0">
-              {userData?.profileImageUrl ? (
+              {globalProfilePic ? (
                 <img 
-                  src={userData.profileImageUrl} 
+                  src={globalProfilePic} 
                   alt="Profile" 
                   className="w-full h-full object-cover"
-                  onError={(e) => { e.target.src = ""; e.target.classList.add('hidden'); }} // Link bozuksa gizle
+                  onError={(e) => { e.target.style.display = 'none'; }} 
                 />
               ) : (
                 <Dumbbell className="w-7 h-7 text-amber-500" />
@@ -78,7 +86,7 @@ function MainApp({ token, onLogout }) {
           
           <div className="flex gap-2 bg-gray-950 p-1 rounded-xl border border-gray-800">
             <button onClick={() => setActiveTab('dashboard')} className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all text-sm font-semibold ${activeTab === 'dashboard' ? 'bg-amber-500 text-gray-950' : 'text-gray-400 hover:text-white'}`}>
-              <Home className="w-4 h-4" /> Dashboard
+              <Home className="w-4 h-4" /> Ana Sayfa
             </button>
             <button onClick={() => setActiveTab('profile')} className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all text-sm font-semibold ${activeTab === 'profile' ? 'bg-amber-500 text-gray-950' : 'text-gray-400 hover:text-white'}`}>
               <Settings className="w-4 h-4" /> Profil
@@ -94,7 +102,7 @@ function MainApp({ token, onLogout }) {
         </div>
 
         {activeTab === 'dashboard' && <DashboardTab token={token} userData={userData} refreshData={fetchUserData} />}
-        {activeTab === 'profile' && <ProfileTab token={token} userData={userData} refreshData={fetchUserData} />}
+        {activeTab === 'profile' && <ProfileTab token={token} userData={userData} refreshData={fetchUserData} globalProfilePic={globalProfilePic} setGlobalProfilePic={setGlobalProfilePic} />}
         {activeTab === 'notifications' && <NotificationsTab token={token} />}
 
       </div>
@@ -194,18 +202,44 @@ function DashboardTab({ token, userData, refreshData }) {
   );
 }
 
-function ProfileTab({ token, userData, refreshData }) {
+function ProfileTab({ token, userData, refreshData, globalProfilePic, setGlobalProfilePic }) {
   const [profileForm, setProfileForm] = useState({ username: '', email: '', currentPassword: '', newPassword: '' });
-  const [imageForm, setImageForm] = useState({ profileImageUrl: '' });
+  const [base64Image, setBase64Image] = useState('');
+  const [loading, setLoading] = useState(false);
 
+  // Dosya Seçme ve Base64'e Çevirme İşlemi
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setBase64Image(reader.result); // Seçilen dosyayı metne (Base64) çevirdik
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Fotoğrafı Backend'e Yollama İşlemi
   const handleImageUpdate = async (e) => {
     e.preventDefault();
+    if(!base64Image) return alert("Lütfen bir fotoğraf seçin.");
+    setLoading(true);
+    
     try {
-      await axios.put(`${API_URL}/api/Profile/image`, imageForm, { headers: { Authorization: `Bearer ${token}` } });
-      alert("Fotoğraf güncellendi!");
-      setImageForm({ profileImageUrl: '' });
-      refreshData(); // Header'daki fotoğrafın anında değişmesi için verileri yenile
-    } catch (err) { alert("Hata."); }
+      await axios.put(`${API_URL}/api/Profile/image`, { profileImageUrl: base64Image }, { headers: { Authorization: `Bearer ${token}` } });
+      
+      // Fotoğrafı Global Hafızaya ve LocalStorage'a kaydet ki her yerde anında değişsin
+      setGlobalProfilePic(base64Image);
+      localStorage.setItem('profilePic', base64Image);
+      
+      alert("Fotoğraf başarıyla güncellendi!");
+      setBase64Image('');
+      refreshData(); 
+    } catch (err) { 
+      alert("Fotoğraf güncellenirken hata oluştu."); 
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleProfileUpdate = async (e) => {
@@ -220,23 +254,37 @@ function ProfileTab({ token, userData, refreshData }) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in slide-in-from-bottom duration-500">
+      
+      {/* YEREL DOSYA YÜKLEME ALANI */}
       <div className="bg-gray-900 border border-gray-800 p-8 rounded-3xl shadow-2xl space-y-6">
         <div className="flex items-center gap-4 mb-4">
-          <div className="w-20 h-20 bg-gray-950 rounded-3xl border-2 border-amber-500 flex items-center justify-center overflow-hidden shadow-2xl">
-            {userData?.profileImageUrl ? (
-              <img src={userData.profileImageUrl} alt="Profile" className="w-full h-full object-cover" />
+          <div className="w-20 h-20 bg-gray-950 rounded-3xl border-2 border-amber-500 flex items-center justify-center overflow-hidden shadow-2xl shrink-0">
+            {base64Image ? (
+              <img src={base64Image} alt="Preview" className="w-full h-full object-cover" />
+            ) : globalProfilePic ? (
+              <img src={globalProfilePic} alt="Profile" className="w-full h-full object-cover" />
             ) : (
               <ImageIcon className="w-8 h-8 text-gray-800" />
             )}
           </div>
           <div>
             <h2 className="text-xl font-bold text-white">Profil Fotoğrafı</h2>
-            <p className="text-sm text-gray-500 font-medium">Uygulama genelindeki görselin.</p>
+            <p className="text-sm text-gray-500 font-medium">Bilgisayarından bir fotoğraf seç.</p>
           </div>
         </div>
+        
         <form onSubmit={handleImageUpdate} className="space-y-4">
-          <input type="url" placeholder="https://resim-adresi.com/foto.jpg" required value={imageForm.profileImageUrl} onChange={(e) => setImageForm({profileImageUrl: e.target.value})} className="w-full bg-gray-950 border border-gray-800 rounded-xl p-4 text-sm focus:border-amber-500 outline-none text-white transition-all" />
-          <button type="submit" className="w-full bg-gray-800 hover:bg-amber-500 hover:text-gray-950 text-white font-bold py-4 rounded-xl transition-all shadow-lg active:scale-95">FOTOĞRAFI GÜNCELLE</button>
+          <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-800 border-dashed rounded-xl cursor-pointer bg-gray-950 hover:border-amber-500 hover:bg-gray-900 transition-all">
+            <div className="flex flex-col items-center justify-center pt-5 pb-6">
+              <Upload className="w-8 h-8 text-gray-500 mb-2" />
+              <p className="mb-2 text-sm text-gray-400"><span className="font-semibold text-amber-500">Tıklayarak Seç</span> veya sürükle bırak</p>
+              <p className="text-xs text-gray-600">PNG, JPG (Maks. boyut önerisi: 1MB)</p>
+            </div>
+            <input type="file" className="hidden" accept="image/*" onChange={handleFileChange} />
+          </label>
+          <button type="submit" disabled={loading || !base64Image} className="w-full bg-gray-800 hover:bg-amber-500 hover:text-gray-950 text-white font-bold py-4 rounded-xl transition-all shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed">
+            {loading ? 'YÜKLENİYOR...' : 'FOTOĞRAFI GÜNCELLE'}
+          </button>
         </form>
       </div>
 
