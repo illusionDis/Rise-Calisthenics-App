@@ -40,10 +40,10 @@ Spor ve sağlıklı yaşam.
 
 Proje dokümantasyonuna aşağıdaki linklerden erişebilirsiniz:
 
-1. [Gereksinim Analizi](Gereksinim-Analizi.md)
-2. [REST API Tasarımı](API-Tasarimi.md)
-3. [REST API](Rest-API.md)
-4. [Web Front-End](WebFrontEnd.md)
-5. [Mobil Front-End](MobilFrontEnd.md)
-6. [Mobil Backend](MobilBackEnd.md)
-7. [Video Sunum](Sunum.md)
+1. [Gereksinim Analizi](YazMuh/Gereksinim-Analizi.md)
+2. [REST API Tasarımı](YazMuh/API-Tasarimi.md)
+3. [REST API](YazMuh/Rest-API.md)
+4. [Web Front-End](YazMuh/WebFrontEnd.md)
+5. [Mobil Front-End](YazMuh/MobilFrontEnd.md)
+6. [Mobil Backend](YazMuh/MobilBackEnd.md)
+7. [Video Sunum](YazMuh/Sunum.md)
