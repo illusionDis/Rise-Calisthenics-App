@@ -521,7 +521,7 @@ function ProfileTab({ token, userData, refreshData, globalProfilePic, setGlobalP
     
     try {
       await axios.put(`${API_URL}/api/Profile/image`, 
-        { profileImageUrl: 'local-upload-success' }, 
+        { profileImageUrl: 'https://ui-avatars.com/api/?name=Ashura&background=random' }, 
         { headers: { Authorization: `Bearer ${token}` } }
       );
       
