@@ -1,21 +1,22 @@
 # AshuraForge REST API
 
-> **Domain:** `https://ashuraforge-api.railway.app`  
-> **Swagger UI:** [`https://ashuraforge-api.railway.app/index.html`](https://ashura-forge-production-7424.up.railway.app)
+> **Domain:** `https://ashura-forge-production-7424.up.railway.app`  
+> **Swagger UI:** [`https://ashura-forge-production-7424.up.railway.app/swagger/index.html`](https://ashura-forge-production-7424.up.railway.app/swagger/index.html)
+> **Başarı Kanıtı (YouTube):** `https://youtu.be/Me5AuXSdm0M`
 
 ---
 
 ## Gereksinimler ve Uç Noktalar
 
 ### GEREKSİNİM 1 – Kayıt ol
-**POST** `/api/auth/register`
+**POST** `/api/Auth/register`
 
 **Body:**
 ```json
 {
-  "username": "neset",
-  "email": "neset@example.com",
-  "password": "123456"
+  "email": "test@test.com",
+  "password": "Password123*",
+  "username": "test_kullanici"
 }
 ```
 **Başarılı Yanıt (200):**
@@ -28,7 +29,7 @@
     "username": "neset",
     "email": "neset@example.com",
     "title": "Acemi Savaşçı",
-    "expiresAt": "2025-01-02T12:00:00Z"
+    "expiresAt": "2026-04-05T12:00:00Z"
   }
 }
 ```
@@ -36,42 +37,41 @@
 ---
 
 ### GEREKSİNİM 2 – Giriş yap
-**POST** `/api/auth/login`
+**POST** `/api/Auth/login`
 
 **Body:**
 ```json
 {
-  "email": "neset@example.com",
-  "password": "123456"
+  "email": "test@test.com",
+  "password": "Password123*"
 }
 ```
 
 ---
 
 ### GEREKSİNİM 3 – Antrenman ekle
-**POST** `/api/workout`  
+**POST** `/api/Workout`  
 🔒 *Auth gerekli*
 
 **Body:**
 ```json
 {
-  "name": "Sabah Koşusu",
-  "description": "5 km hafif koşu",
-  "category": "Cardio",
-  "durationMinutes": 30
+  "name": "Barfiks Antrenmanı",
+  "durationInMinutes": 45,
+  "difficulty": "Medium"
 }
 ```
 
 ---
 
 ### GEREKSİNİM 4 – Antrenman sil
-**DELETE** `/api/workout/{id}`  
+**DELETE** `/api/Workout/{id}`  
 🔒 *Auth gerekli*
 
 ---
 
 ### GEREKSİNİM 5 – Rozet kazan
-**PATCH** `/api/badge/check`  
+**PATCH** `/api/Badge/check`  
 🔒 *Auth gerekli*
 
 > Not: Rozet kontrolü otomatik olarak antrenman eklendikten sonra da tetiklenir.
@@ -79,42 +79,41 @@
 ---
 
 ### GEREKSİNİM 6 – Bildirim al
-**GET** `/api/notification`  
+**GET** `/api/Notification`  
 🔒 *Auth gerekli*
 
 ---
 
 ### GEREKSİNİM 7 – Profil fotoğrafı değiştir
-**PUT** `/api/profile/image`  
+**PUT** `/api/Profile/image`  
 🔒 *Auth gerekli*
 
 **Body:**
 ```json
 {
-  "profileImageUrl": "https://example.com/avatar.png"
+  "profileImageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJdkPNNzfXQQvYT2auhVTXh3nopus1hrTe_w&s"
 }
 ```
 
 ---
 
 ### GEREKSİNİM 8 – Profil düzenle
-**PATCH** `/api/profile`  
+**PATCH** `/api/Profile`  
 🔒 *Auth gerekli*
 
 **Body:**
 ```json
 {
-  "username": "yeniIsim",
-  "email": "yeni@email.com",
-  "currentPassword": "eskiSifre",
-  "newPassword": "yeniSifre"
+  "firstName": "Ayberk",
+  "lastName": "Developer",
+  "bio": "FullstackLoneWolf"
 }
 ```
 
 ---
 
 ### GEREKSİNİM 9 & 10 – Title kazan + Progress tracking
-**GET** `/api/progress`  
+**GET** `/api/Progress`  
 🔒 *Auth gerekli*
 
 **Başarılı Yanıt (200):**
@@ -128,8 +127,8 @@
     "badgeCount": 2,
     "nextTitle": "Gümüş Savaşçı",
     "workoutsToNextTitle": 8,
-    "recentWorkouts": [...],
-    "earnedBadges": [...]
+    "recentWorkouts": [],
+    "earnedBadges": []
   }
 }
 ```
