@@ -21,8 +21,8 @@ Spor ve sağlıklı yaşam.
 
 ## Proje Linkleri
 
-- **REST API Adresi:** [api.yazmuh.com](https://api.yazmuh.com)
-- **Web Frontend Adresi:** [frontend.yazmuh.com](https://frontend.yazmuh.com)
+- **REST API Adresi:** [https://ashura-forge-production-7424.up.railway.app/index.html](https://ashura-forge-production-7424.up.railway.app/index.html)
+- **Web Frontend Adresi:** [https://ashura-forge-calisthenics-app.vercel.app/](https://ashura-forge-calisthenics-app.vercel.app/)
 
 ---
 
