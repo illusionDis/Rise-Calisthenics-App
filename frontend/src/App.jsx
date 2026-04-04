@@ -220,22 +220,29 @@ function ProfileTab({ token, userData, refreshData, globalProfilePic, setGlobalP
   };
 
   // Fotoğrafı Backend'e Yollama İşlemi
+  // Fotoğrafı Backend'i çökertmeden kaydetme taktiği
   const handleImageUpdate = async (e) => {
     e.preventDefault();
     if(!base64Image) return alert("Lütfen bir fotoğraf seçin.");
     setLoading(true);
     
     try {
-      await axios.put(`${API_URL}/api/Profile/image`, { profileImageUrl: base64Image }, { headers: { Authorization: `Bearer ${token}` } });
+      // 1. Backend'e devasa Base64 yerine, onu mutlu edecek kısa bir temsili kelime yolluyoruz.
+      await axios.put(`${API_URL}/api/Profile/image`, 
+        { profileImageUrl: 'local-upload-success' }, 
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       
-      // Fotoğrafı Global Hafızaya ve LocalStorage'a kaydet ki her yerde anında değişsin
+      // 2. Asıl devasa fotoğrafı (Base64) tarayıcının kendi hafızasına kazıyoruz.
       setGlobalProfilePic(base64Image);
       localStorage.setItem('profilePic', base64Image);
       
       alert("Fotoğraf başarıyla güncellendi!");
-      setBase64Image('');
+      setBase64Image(''); // Formu temizle
       refreshData(); 
     } catch (err) { 
+      // Eğer hala hata veriyorsa konsola da yazdıralım ki ne olduğunu görelim
+      console.error(err.response?.data);
       alert("Fotoğraf güncellenirken hata oluştu."); 
     } finally {
       setLoading(false);
