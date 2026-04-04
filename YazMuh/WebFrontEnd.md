@@ -2,7 +2,7 @@
 
 > **Canlı Web Sitesi (Vercel):** `https://ashura-forge-calisthenics-app.vercel.app`
 > **Bağlı Olduğu API (Railway):** `https://ashura-forge-production-7424.up.railway.app`
-> **Başarı Kanıtı (YouTube):** `[BURAYA_VİDEO_LİNKİ_GELECEK]`
+> **Başarı Kanıtı (YouTube):** `https://youtu.be/_u__mLPsIl4`
 
 ---
 

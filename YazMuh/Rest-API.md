@@ -1,7 +1,7 @@
 # AshuraForge REST API
 
 > **Domain:** `https://ashura-forge-production-7424.up.railway.app`  
-> **Swagger UI:** [`https://ashura-forge-production-7424.up.railway.app/swagger/index.html`](https://ashura-forge-production-7424.up.railway.app/swagger/index.html)
+> **Swagger UI:** `https://ashura-forge-production-7424.up.railway.app/index.html`
 > **Başarı Kanıtı (YouTube):** `https://youtu.be/Me5AuXSdm0M`
 
 ---
